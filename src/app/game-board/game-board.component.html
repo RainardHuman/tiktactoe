@@ -1,0 +1,30 @@
+<p>game-board works!</p>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+      <h3>
+        Player Select:
+      </h3>
+      <select name="player-select" id="play-select" [(ngModel)]="playerSelect">
+        <option value="" disabled>Select player</option>
+        <option [value]="'x'">x</option>
+        <option [value]="'o'">o</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div *ngFor="let row of board; let i = index">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-4 " *ngFor="let column of row; let j = index">
+                <div class="board-cell"(click)="setPlayerValue(i, j, playerSelect)">{{column}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>
