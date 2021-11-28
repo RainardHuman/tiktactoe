@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from "../interfaces/user.model";
-
-import firebase from 'firebase/app';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+
+import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/compat/firestore";
+import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {User} from "../interfaces/user.model";
+import firebase from "firebase/compat";
 
 
 @Injectable({
@@ -39,7 +39,7 @@ export class AuthService {
     return this.updateUserData(credential.user);
   }
 
-  private updateUserData(user) {
+  private updateUserData(user: User) {
     const userRef: AngularFirestoreDocument<User> = this.fireStore.doc(`users/${user.uid}`);
     const data = {
       uid: user.uid,
@@ -52,11 +52,12 @@ export class AuthService {
 
   async signOut() {
     await this.fireAuth.signOut();
-    this.router.navigate(['/']);
+    //await this.router.navigate(['/']);
   }
 
   async sendVerifyEmail() {
     const user = firebase.auth().currentUser;
+    if (user)
     user.sendEmailVerification()
       .then();
   }

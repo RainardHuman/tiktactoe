@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "fnb-learning": {
+      "hosting": {
+        "tiktactoe": [
+          "fnb-learning"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "fnb-learning"
+  }
+}

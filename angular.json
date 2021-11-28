@@ -107,6 +107,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "tiktactoe:build:production",
+            "firebaseProject": "fnb-learning",
+            "firebaseHostingSite": "fnb-learning"
+          }
         }
       }
     }

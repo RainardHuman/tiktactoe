@@ -3,18 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { environment } from '../environments/environment';
 
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-
 import { AppComponent } from './app.component';
 import { GameBoardComponent } from './game-board/game-board.component';
 import { FormsModule } from "@angular/forms";
 
-import { AuthService } from "./service/auth.firebase.service";
-import { FirestoreService } from "./service/firestore.firebase.service";
-import { StorageService } from "./service/storage.firebase.service";
+import { AuthService } from "./services/auth.firebase.service";
+import { FirestoreService } from "./services/firestore.firebase.service";
+import { StorageService } from "./services/storage.firebase.service";
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import {getAuth, provideAuth} from "@angular/fire/auth";
+import {getFirestore, provideFirestore} from "@angular/fire/firestore";
 
 @NgModule({
   declarations: [
@@ -24,10 +22,9 @@ import { StorageService } from "./service/storage.firebase.service";
   imports: [
     BrowserModule,
     FormsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule,
-    AngularFireAuthModule,
-    AngularFireStorageModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [AuthService, FirestoreService, StorageService],
   bootstrap: [AppComponent]

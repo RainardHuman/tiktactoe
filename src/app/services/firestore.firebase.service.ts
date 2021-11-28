@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import {AngularFirestore, DocumentChangeAction} from "@angular/fire/firestore";
-import { Feed } from "../interfaces/cards.model";
+import {AngularFirestore, DocumentChangeAction} from "@angular/fire/compat/firestore";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreService {
-  feeds: Feed[] = []
   constructor(
     private firestore: AngularFirestore,
   ) {}
@@ -15,12 +13,12 @@ export class FirestoreService {
     return this.firestore.collection('feeds').snapshotChanges();
   }
 
-  addFeed(feed: Feed) {
-    return this.firestore.collection('feeds').add(feed);
+  addFeed(document: any) {
+    return this.firestore.collection('feeds').add(document);
   }
 
   getDataFromDocs(docs: DocumentChangeAction<unknown>[]): any[] {
-    let data = [];
+    let data: any[] = [];
       docs.forEach(doc => {
         data.push(doc.payload.doc.data());
       });
